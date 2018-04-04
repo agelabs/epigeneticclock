@@ -27,7 +27,7 @@ calculateAge = function(dat0) {
   dat0[, 1] = gsub(x = dat0 [, 1],
                    pattern = "\"",
                    replacement = "")
-  
+
   DoNotProceed = FALSE
   cat(
     paste(
@@ -132,8 +132,7 @@ calculateAge = function(dat0) {
     selectXchromosome[is.na(selectXchromosome)] = FALSE
     meanXchromosome = rep(NA, dim(dat0)[[2]] - 1)
     if (sum(selectXchromosome) >= 500) {
-      meanXchromosome = as.numeric(apply(as.matrix(dat0[selectXchromosome, -1]), 2, mean, na.rm =
-                                           TRUE))
+      meanXchromosome = as.numeric(apply(as.matrix(dat0[selectXchromosome, -1]), 2, mean, na.rm = TRUE))
     }
     if (sum(is.na(meanXchromosome)) > 0) {
       cat(
@@ -162,7 +161,7 @@ calculateAge = function(dat0) {
         append = TRUE
       )
     }
-    
+
     match1 = match(probeAnnotation21kdatMethUsed$Name , dat0[, 1])
     if (sum(is.na(match1)) > 0)
       stop(paste(sum(is.na(match1)), "CpG probes cannot be matched"))
@@ -171,12 +170,12 @@ calculateAge = function(dat0) {
       as.numeric(as.character(x))
     }
     dat1[, -1] = apply(as.matrix(dat1[, -1]), 2, asnumeric1)
-    
+
     set.seed(1)
     # Do you want to normalize the data (recommended)?
     normalizeData = TRUE
     source("StepwiseAnalysis.R", local = TRUE)
-    
+
     if (sum(datout$Comment != "") == 0) {
       cat(
         paste("\n The individual samples appear to be fine.

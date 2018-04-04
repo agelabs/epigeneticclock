@@ -14,7 +14,7 @@ ui <- fluidPage(titlePanel("Epigenetic clock"),
                   helpText("Upload a .csv file. The first column has the CpG cites, the following column(s) has methylation values"),
                   fileInput(
                     inputId = "methylationFile",
-                    label = "Upload methylation .csv file (max 200MB)",
+                    label = "Upload methylation .csv file (max 2GB)",
                     accept = c('text/csv',
                                'text/comma-separated-values,text/plain',
                                '.csv'),
@@ -30,7 +30,7 @@ ui <- fluidPage(titlePanel("Epigenetic clock"),
                     "by",
                     a(href="https://www.biostat.ucla.edu/people/horvath", "Steve Horvath."),
                     "Code available at ",
-                    a(href="https://github.com/aldringsvitenskap/epigeneticclock", "Github."),
+                    a(href="https://github.com/agelabs/epigeneticclock", "Github."),
                     "Send comments or questions to",
                     a(href="https://twitter.com/snowpong", "@snowpong")
                   )
@@ -40,7 +40,7 @@ ui <- fluidPage(titlePanel("Epigenetic clock"),
 
 # Define server
 server <- function(input, output) {
-  options(shiny.maxRequestSize = 200 * 1024 ^ 2)
+  options(shiny.maxRequestSize = 2000 * 1024 ^ 2)
   source("horvath2013.R")
 
   methylation <- reactiveValues(Table  = NULL, Message = NULL, Detail = NULL, Description = NULL, Name = NULL)
