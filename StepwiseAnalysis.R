@@ -2,7 +2,7 @@
 # This file assumes a data frame exists called dat1 whose rows correspond to CpGs
 # and whose first column reports the CpG identifier
 # and whose remaining columns corresponds to samples (e.g. Illumina arrays).
-
+source(MToBeta)
 
 fastImputation = FALSE
 
@@ -16,6 +16,9 @@ maxMethBySample  = as.numeric(apply(as.matrix(dat1[, -1]), 2, max, na.rm =
                                       TRUE))
 
 datMethUsed = t(dat1[, -1])
+shouldConvert = looksLikeMValue(minMethBySample, maxMethBySample)
+if (any(shouldConvert)) datMethUsed[shouldConvert, ] = MToBeta(datMethUsed[shouldConvert, ])
+
 colnames(datMethUsed) = as.character(dat1[, 1])
 
 
